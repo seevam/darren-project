@@ -2,8 +2,15 @@
 
 import { ChevronRight, Droplets, Globe, Heart } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
+import RegistrationModal from '../modals/RegistrationModal'
 
 export default function HeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalConfig, setModalConfig] = useState({
+    title: 'Join Water Guardians',
+    description: 'Register to become part of the youth movement protecting our waters',
+  })
   const stats = [
     { number: '100+', label: 'Youth Engaged', color: '#06B6D4' },
     { number: '5+', label: 'Communities', color: '#3B82F6' },
@@ -69,12 +76,30 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <button className="gradient-cyan-blue px-8 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-cyan-glow transition-all duration-300 flex items-center justify-center gap-2 group">
+              <button
+                onClick={() => {
+                  setModalConfig({
+                    title: 'Join the Challenge',
+                    description: 'Take the first step in your water guardianship journey',
+                  })
+                  setIsModalOpen(true)
+                }}
+                className="gradient-cyan-blue px-8 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-cyan-glow transition-all duration-300 flex items-center justify-center gap-2 group"
+              >
                 Join the Challenge
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
               </button>
 
-              <button className="border-2 border-white/30 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all duration-300">
+              <button
+                onClick={() => {
+                  setModalConfig({
+                    title: 'Learn More About Water Guardians',
+                    description: 'Discover how you can make a difference in protecting our waters',
+                  })
+                  setIsModalOpen(true)
+                }}
+                className="border-2 border-white/30 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all duration-300"
+              >
                 Learn More
               </button>
             </motion.div>
@@ -128,6 +153,14 @@ export default function HeroSection() {
 
       {/* Wave Pattern Decoration */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-slate-900/50 pointer-events-none" />
+
+      {/* Registration Modal */}
+      <RegistrationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={modalConfig.title}
+        description={modalConfig.description}
+      />
     </section>
   )
 }
