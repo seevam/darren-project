@@ -86,25 +86,56 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Stats Cards */}
-          <div className="grid grid-cols-2 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center hover:border-blue-500/50 hover:scale-105 transition-all duration-300 shadow-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-              >
-                <div
-                  className="text-4xl font-black font-display mb-2"
-                  style={{ color: stat.color }}
+          {/* Right Column - Video & Stats */}
+          <div className="space-y-6">
+            {/* Video Section */}
+            <motion.div
+              className="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl hover:border-cyan-primary/50 transition-all duration-300"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="relative aspect-video bg-slate-800">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster="/images/river-cleaning-poster.jpg"
                 >
-                  {stat.number}
+                  <source src="/videos/river-cleaning.mp4" type="video/mp4" />
+                  <source src="/videos/river-cleaning.webm" type="video/webm" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900/90 to-transparent">
+                  <p className="text-sm font-semibold text-white">River Cleaning in Action</p>
+                  <p className="text-xs text-slate-300">Youth making a difference</p>
                 </div>
-                <div className="text-sm text-slate-300">{stat.label}</div>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-center hover:border-blue-500/50 hover:scale-105 transition-all duration-300 shadow-lg"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                >
+                  <div
+                    className="text-3xl font-black font-display mb-1"
+                    style={{ color: stat.color }}
+                  >
+                    {stat.number}
+                  </div>
+                  <div className="text-xs text-slate-300">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
