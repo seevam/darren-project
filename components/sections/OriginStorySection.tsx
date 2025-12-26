@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import Image from 'next/image'
 
 export default function OriginStorySection() {
   const ref = useRef(null)
@@ -100,6 +101,58 @@ export default function OriginStorySection() {
               </motion.div>
             </div>
           </div>
+
+          {/* Photo Gallery Section */}
+          <motion.div
+            className="mt-12 pt-12 border-t border-white/10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <h3 className="text-3xl lg:text-4xl font-black font-display mb-3 text-center">
+              Youth <span className="gradient-text">in Action</span>
+            </h3>
+            <p className="text-center text-slate-300 mb-8 max-w-2xl mx-auto">
+              Indonesian high school students leading the charge in river cleaning initiatives
+            </p>
+
+            {/* Photo Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {[1, 2, 3, 4, 5, 6].map((index) => (
+                <motion.div
+                  key={index}
+                  className="relative group overflow-hidden rounded-2xl aspect-square bg-slate-800/60 border border-white/10 hover:border-cyan-primary/50 transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                >
+                  <Image
+                    src={`/images/students/river-cleaning-${index}.jpg`}
+                    alt={`Indonesian students cleaning river - Photo ${index}`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <p className="text-sm font-semibold text-white">Community Action</p>
+                    <p className="text-xs text-slate-300">Making rivers clean again</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Call to Action */}
+            <motion.div
+              className="mt-8 text-center"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+              <p className="text-slate-400 text-sm italic">
+                Join these passionate youth leaders in protecting our water resources
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

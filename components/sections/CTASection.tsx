@@ -2,12 +2,18 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { ChevronRight } from 'lucide-react'
+import RegistrationModal from '../modals/RegistrationModal'
 
 export default function CTASection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.5 })
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalConfig, setModalConfig] = useState({
+    title: 'Join Water Guardians',
+    description: 'Register to become part of the youth movement protecting our waters',
+  })
 
   return (
     <section ref={ref} className="relative py-24 px-6 lg:px-12">
@@ -27,17 +33,43 @@ export default function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="gradient-cyan-blue px-10 py-5 rounded-full text-lg font-bold shadow-xl hover:shadow-cyan-glow transition-all duration-300 flex items-center justify-center gap-2 group">
+            <button
+              onClick={() => {
+                setModalConfig({
+                  title: 'Register Now',
+                  description: 'Join the movement and start making a difference today',
+                })
+                setIsModalOpen(true)
+              }}
+              className="gradient-cyan-blue px-10 py-5 rounded-full text-lg font-bold shadow-xl hover:shadow-cyan-glow transition-all duration-300 flex items-center justify-center gap-2 group"
+            >
               Register Now
               <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
             </button>
 
-            <button className="border-2 border-white/30 px-10 py-5 rounded-full text-lg font-bold hover:bg-white/10 transition-all duration-300">
+            <button
+              onClick={() => {
+                setModalConfig({
+                  title: 'Explore Our Projects',
+                  description: 'Get involved with ongoing water conservation initiatives',
+                })
+                setIsModalOpen(true)
+              }}
+              className="border-2 border-white/30 px-10 py-5 rounded-full text-lg font-bold hover:bg-white/10 transition-all duration-300"
+            >
               Explore Projects
             </button>
           </div>
         </motion.div>
       </div>
+
+      {/* Registration Modal */}
+      <RegistrationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={modalConfig.title}
+        description={modalConfig.description}
+      />
     </section>
   )
 }
