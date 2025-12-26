@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import Image from 'next/image'
 
 export default function OriginStorySection() {
   const ref = useRef(null)
@@ -125,10 +126,11 @@ export default function OriginStorySection() {
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                 >
-                  <img
+                  <Image
                     src={`/images/students/river-cleaning-${index}.jpg`}
                     alt={`Indonesian students cleaning river - Photo ${index}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">

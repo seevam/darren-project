@@ -128,7 +128,7 @@ export default function RegistrationModal({
                     Registration Successful!
                   </h3>
                   <p className="text-slate-300">
-                    Welcome to Water Guardians. We'll be in touch soon!
+                    Welcome to Water Guardians. We&apos;ll be in touch soon!
                   </p>
                 </motion.div>
               ) : (
